@@ -1,61 +1,61 @@
-//package org.upgrad.controllers;
-//
-//import org.hamcrest.Matchers;
-//import org.junit.Test;
-//import org.junit.runner.RunWith;
-//import org.mockito.Mockito;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-//import org.springframework.boot.test.mock.mockito.MockBean;
-//import org.springframework.http.MediaType;
-//import org.springframework.test.context.junit4.SpringRunner;
-//import org.springframework.test.web.servlet.MockMvc;
-//import org.upgrad.models.Restaurant;
-//import org.upgrad.models.UserAuthToken;
-//import org.upgrad.requestResponseEntity.RestaurantResponse;
-//import org.upgrad.requestResponseEntity.RestaurantResponseCategorySet;
-//import org.upgrad.services.RestaurantService;
-//import org.upgrad.services.UserAuthTokenService;
-//
-//import java.util.List;
-//
-//import static java.util.Collections.singletonList;
-//import static org.assertj.core.util.DateUtil.now;
-//import static org.hamcrest.Matchers.containsString;
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-//import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON;
-//
-//// This class contains all the test cases regarding the restaurant controller
-//@RunWith(SpringRunner.class)
-//@WebMvcTest(RestaurantController.class)
-//public class RestaurantControllerTest {
-//
-//    @Autowired
-//    private MockMvc mvc;
-//
-//    @MockBean
-//    RestaurantService restaurantService;
-//
-//    @MockBean
-//    private UserAuthTokenService userAuthTokenService;
-//
-//    @Test
-//    public void getAllRestaurants() throws Exception{
-//        RestaurantResponse restaurant = new RestaurantResponse();
-//        restaurant.setId(1);
-//        restaurant.setUserRating(4.3);
-//        List<RestaurantResponse> restaurants = singletonList(restaurant);
-//        Mockito.when(restaurantService.getAllRestaurant()).thenReturn(restaurants);
-//        String url = "/restaurant";
-//        mvc.perform(get(url)
-//                .contentType(MediaType.asMediaType(APPLICATION_JSON)))
-//                .andExpect(status().is2xxSuccessful())
-//                .andExpect(jsonPath("$[0].userRating", Matchers.is(4.3)));
-//    }
+package org.upgrad.controllers;
+
+import org.hamcrest.Matchers;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.upgrad.models.Restaurant;
+import org.upgrad.models.UserAuthToken;
+import org.upgrad.requestResponseEntity.RestaurantResponse;
+import org.upgrad.requestResponseEntity.RestaurantResponseCategorySet;
+import org.upgrad.services.RestaurantService;
+import org.upgrad.services.UserAuthTokenService;
+
+import java.util.List;
+
+import static java.util.Collections.singletonList;
+import static org.assertj.core.util.DateUtil.now;
+import static org.hamcrest.Matchers.containsString;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON;
+
+// This class contains all the test cases regarding the restaurant controller
+@RunWith(SpringRunner.class)
+@WebMvcTest(RestaurantController.class)
+public class RestaurantControllerTest {
+
+    @Autowired
+    private MockMvc mvc;
+
+    @MockBean
+    RestaurantService restaurantService;
+
+    @MockBean
+    private UserAuthTokenService userAuthTokenService;
+
+    @Test
+    public void getAllRestaurants() throws Exception{
+        RestaurantResponse restaurant = new RestaurantResponse();
+        restaurant.setId(1);
+        restaurant.setUserRating(4.3);
+        List<RestaurantResponse> restaurants = singletonList(restaurant);
+        Mockito.when(restaurantService.getAllRestaurant()).thenReturn(restaurants);
+        String url = "/restaurant";
+        mvc.perform(get(url)
+                .contentType(MediaType.asMediaType(APPLICATION_JSON)))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("$[0].userRating", Matchers.is(4.3)));
+    }
 //    @Test
 //    public void getRestaurantsByNameWithIncorrectName() throws Exception{
 //        Mockito.when(restaurantService.getRestaurantByName("kcf")).thenReturn(null);
@@ -192,5 +192,5 @@
 //                .andExpect(jsonPath("$.userRating", Matchers.is(4.2)))
 //                .andExpect(jsonPath("$.restaurantName", Matchers.is("dominoz")));
 //    }
-//
-//}
+
+}
