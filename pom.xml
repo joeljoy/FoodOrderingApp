@@ -21,7 +21,7 @@
         <java.version>1.8</java.version>
         <sql-maven-plugin.version>1.5</sql-maven-plugin.version>
         <postgresql.driver.version>42.2.2</postgresql.driver.version>
-        <postgresql.driver.name>org.postgresql.Driver</postgresql.driver.name>
+        <postgresql.driver.restaurantName>org.postgresql.Driver</postgresql.driver.restaurantName>
         <sql.path>${basedir}/src/main/resources/sql</sql.path>
     </properties>
 
@@ -149,8 +149,8 @@
                 </dependencies>
 
                 <configuration>
-                    <driver>${postgresql.driver.name}</driver>
-                    <url>jdbc:postgresql://${server.host}:${server.port}/${database.name}</url>
+                    <driver>${postgresql.driver.restaurantName}</driver>
+                    <url>jdbc:postgresql://${server.host}:${server.port}/${database.restaurantName}</url>
                     <username>${database.user}</username>
                     <password>${database.password}</password>
                     <autocommit>true</autocommit>

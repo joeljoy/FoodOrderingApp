@@ -1,5 +1,8 @@
 package org.upgrad.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +15,9 @@ public class Restaurant {
     private Integer id;
 
     @Column(name = "restaurant_name", nullable = false)
-    private String name;
+    private String restaurantName;
 
-    @Column(name = "photo_url", nullable = true)
+    @Column(name = "photo_url")
     private String photoUrl;
 
     @Column(name = "user_rating")
@@ -26,21 +29,33 @@ public class Restaurant {
     @Column(name = "number_of_users_rated")
     private Integer numberOfUsersRated;
 
-//    @Column(name = "address_id")
-//    private Integer addressId;
-
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Address address;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Category> category = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "restaurant_category",
+            joinColumns = {@JoinColumn(name = "restaurant_id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id")}
+    )
+    @JsonIgnore
+    private List<Category> categories = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "restaurant_item",
+            joinColumns = {@JoinColumn(name = "restaurant_id")},
+            inverseJoinColumns = {@JoinColumn(name = "item_id")}
+    )
+    @JsonIgnore
+    private List<Item> items = new ArrayList<>();
 
     public Restaurant() {
     }
 
-    public Restaurant(String name, String photoUrl, Double userRating,
+    public Restaurant(String restaurantName, String photoUrl, Double userRating,
                       Integer averagePrice, Integer numberOfUsersRated) {
-        this.name = name;
+        this.restaurantName = restaurantName;
         this.photoUrl = photoUrl;
         this.userRating = userRating;
         this.averagePrice = averagePrice;
@@ -51,12 +66,16 @@ public class Restaurant {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
     }
 
     public String getPhotoUrl() {
@@ -99,11 +118,23 @@ public class Restaurant {
         this.address = address;
     }
 
+    @JsonIgnore
     public List<Category> getCategory() {
-        return category;
+        return categories;
     }
 
+    @JsonIgnore
     public void setCategory(List<Category> category) {
-        this.category = category;
+        this.categories = category;
+    }
+
+    @JsonIgnore
+    public List<Item> getItem() {
+        return items;
+    }
+
+    @JsonIgnore
+    public void setItem(List<Item> item) {
+        this.items = item;
     }
 }
