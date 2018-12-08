@@ -1,9 +1,6 @@
 package org.upgrad.services;
 
 import org.upgrad.models.User;
-import org.upgrad.models.UserAuthToken;
-
-import java.util.Optional;
 
 /*
  * This UserService interface gives the list of all the service that exist in the user service implementation class.
@@ -14,4 +11,12 @@ public interface UserService {
     String findUserPassword(String contactNumber);
 
     User findUser(String contactNumber);
+
+    void addUser(User newuser);
+
+    User updateUserDetails(String firstname, String lastname, long userid);
+
+    User getUserById(Integer id);
+
+    Integer updateUserPassword(String password, Integer id);
 }
