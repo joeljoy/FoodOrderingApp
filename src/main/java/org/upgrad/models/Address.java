@@ -27,13 +27,13 @@ public class Address {
     public Address() {
     }
 
-//    public Address(String flatbuildNumber, String locality, String city, String zipcode, States states) {
-//        this.flatbuildNumber = flatbuildNumber;
-//        this.locality = locality;
-//        this.city = city;
-//        this.zipcode = zipcode;
-//        this.state = states;
-//    }
+    public Address(String flatbuildNumber, String locality, String city, String zipcode, States states) {
+        this.flatbuildNumber = flatbuildNumber;
+        this.locality = locality;
+        this.city = city;
+        this.zipcode = zipcode;
+        this.state = states;
+    }
 
     public Address(Integer id, String flat_build_number, String locality, String city, String zipcode, States state) {
         this.id = id ;
@@ -43,6 +43,8 @@ public class Address {
         this.zipcode = zipcode ;
         this.state = state ;
     }
+
+
 
     public States getState() {
         return state;

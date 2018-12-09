@@ -13,22 +13,17 @@ import javax.persistence.Table;
 @Table(name="user_address")
 public class UserAddress {
 
-    public UserAddress(long id, String type, Integer user_id, Integer address_id) {
-        this.id = id;
-        this.type = type;
-        this.user_id = user_id;
-        this.address_id = address_id;
-    }
+
 
     public  UserAddress(){
 
     }
 
-//    public UserAddress(User user,Address address,String type){
-//        this.user = user;
-//        this.address = address;
-//        this.type = type;
-//    }
+    public UserAddress(User user,Address address,String type){
+        this.user = user;
+        this.address = address;
+        this.type = type;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,19 +32,14 @@ public class UserAddress {
     @Column(name = "type")
     private String type;
 
-    @Column(name = "user_id")
-    private Integer user_id;
 
-    @Column(name = "address_id")
-    private Integer address_id;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "user_id")
-//    private User user;
-//
-//    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-//    @JoinColumn(name = "address_id")
-//    private Address address;
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name = "address_id")
+    private Address address;
 
 
     public long getId() {
@@ -68,30 +58,30 @@ public class UserAddress {
         this.type = type;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+//    public Integer getUser_id() {
+//        return user_id;
+//    }
+//
+//    public void setUser_id(Integer user_id) {
+//        this.user_id = user_id;
+//    }
+
+
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
+    public Address getAddress_id() {
+        return address;
+    }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
-//
-//    public Address getAddress_id() {
-//        return address;
-//    }
-//
-//    public void setAddress_id(Address address_id) {
-//        this.address = address_id;
-//    }
+    public void setAddress_id(Address address_id) {
+        this.address = address_id;
+    }
 
 //    public Integer getAddress_id() {
 //        return address_id;

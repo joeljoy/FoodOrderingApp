@@ -1,5 +1,6 @@
 package org.upgrad.controllers;
 
+import com.sun.org.apache.xerces.internal.util.HTTPInputSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class AddressController {
 
     @PostMapping("/address")
     @CrossOrigin
-    public ResponseEntity<?> addaddress(@RequestParam String flatBuildnumber,@RequestParam String locality, @RequestParam String city, @RequestParam Integer stateid, @RequestParam(required = false) String zipcode, @RequestParam(required = false) String type, @RequestHeader String accessToken){
+    public ResponseEntity<?> addaddress(@RequestParam String flatBuildnumber,@RequestParam String locality, @RequestParam String city, @RequestParam Integer stateid, @RequestParam String zipcode, @RequestParam(required = false) String type, @RequestHeader String accessToken){
         String msg = "";
         HttpStatus httpcode = HttpStatus.OK;
         if(userAuthTokenService.isUserLoggedIn(accessToken) == null){
@@ -37,15 +38,25 @@ public class AddressController {
             Integer userId = userAuthTokenService.getUserId(accessToken);
             if(zipcode.length() == 6 && zipcode.matches("[0-9]+"))
             {
+                String addrtype="temp";
                 States state = addressService.checkValidState(stateid);
 
                 int addressid = addressService.countAddress()+1;
-                String addrtype = "temp";
 
-                Address address = new Address(addressid,flatBuildnumber,locality,city,zipcode,state);
 
-                if(type.equalsIgnoreCase("perm")){
+                Address address = new Address(flatBuildnumber,locality,city,zipcode,state);
+
+                if(type==null || type.equalsIgnoreCase("temp") ){
+                    addrtype = "temp";
+                }
+                else if (type.equalsIgnoreCase("perm"))
+                {
                     addrtype = "perm";
+                }
+                else{
+                    msg = "Address type can be perm or temp. If nothing is entered, default is temp.";
+                    httpcode = HttpStatus.BAD_REQUEST;
+                    return  new ResponseEntity<>(msg,httpcode);
                 }
 
                 addressService.addAddress(address);
