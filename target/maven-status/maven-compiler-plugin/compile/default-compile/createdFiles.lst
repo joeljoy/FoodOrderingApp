@@ -2,7 +2,9 @@ org/upgrad/services/UserAuthTokenService.class
 org/upgrad/services/OrderServiceImpl.class
 org/upgrad/models/Address.class
 org/upgrad/repositories/UserAuthTokenRepository.class
+org/upgrad/services/CouponServiceImpl.class
 org/upgrad/requestResponseEntity/RestaurantResponse.class
+org/upgrad/services/CouponService.class
 org/upgrad/repositories/CategoryRepository.class
 org/upgrad/models/User.class
 org/upgrad/models/OrderItem.class
@@ -42,6 +44,7 @@ org/upgrad/requestResponseEntity/ItemQuantity.class
 org/upgrad/models/Payment.class
 org/upgrad/services/UserServiceImpl.class
 org/upgrad/requestResponseEntity/RestaurantResponseCategorySet.class
+org/upgrad/requestResponseEntity/CouponResponse.class
 org/upgrad/repositories/RestaurantRepository.class
 org/upgrad/repositories/StateRepository.class
 org/upgrad/models/UserAuthToken.class

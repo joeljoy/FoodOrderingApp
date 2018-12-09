@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface CouponRepository extends CrudRepository<Coupon, Integer> {
 
-    @Query(nativeQuery = true, value = "SELECT * FROM coupon WHERE UPPER (coupon_name) LIKE CONCAT ('%',UPPER (?1), '%')")
+    @Query(nativeQuery = true, value = "SELECT * FROM coupon WHERE UPPER (coupon_name) = UPPER (?1)")
     List<Coupon> findByName(String couponName);
 }

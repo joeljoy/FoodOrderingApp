@@ -17,8 +17,8 @@ public class Coupon {
     private Integer percent;
 
     // TODO: Check this!
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Order order;
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    private Order order;
 
     public Coupon() {}
 
@@ -51,11 +51,11 @@ public class Coupon {
         this.percent = percent;
     }
 
-    public Order getOrder() {
-        return order;
-    }
+//    public Order getOrder() {
+//        return order;
+//    }
 
-    public void setOrder(Order order) {
-        this.order = order;
-    }
+//    public void setOrder(Order order) {
+//        this.order = order;
+//    }
 }
