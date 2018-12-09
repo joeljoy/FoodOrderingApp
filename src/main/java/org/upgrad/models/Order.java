@@ -42,7 +42,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(Double bill, Coupon coupon, Double discount, Date date, Payment payment, User user, Address address, List<OrderItem> orderItems) {
+    public Order(Double bill, Coupon coupon, Double discount, Date date, Payment payment, User user, Address address) {
         this.bill = bill;
         this.coupon = coupon;
         this.discount = discount;
@@ -50,15 +50,6 @@ public class Order {
         this.payment = payment;
         this.user = user;
         this.address = address;
-        this.orderItems = orderItems;
-    }
-
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
-    }
-
-    public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
     }
 
     public Integer getId() {

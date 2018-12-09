@@ -25,9 +25,6 @@ public class Item {
     @Column(name = "type")
     private String type;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<OrderItem> orderItems;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "restaurant_item",
@@ -54,6 +51,18 @@ public class Item {
         this.itemName = itemName;
         this.price = price;
         this.type = type;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
     public Integer getId() {

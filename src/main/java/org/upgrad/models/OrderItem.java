@@ -1,6 +1,7 @@
 package org.upgrad.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "order_item")
@@ -16,12 +17,36 @@ public class OrderItem {
     @Column(name = "price")
     private Integer price;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Order order;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Item item;
+
     public OrderItem() {
     }
 
-    public OrderItem(Integer quantity, Integer price) {
+    public OrderItem(Integer quantity, Integer price, Order order, Item item) {
         this.quantity = quantity;
         this.price = price;
+        this.order = order;
+        this.item = item;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public Integer getId() {

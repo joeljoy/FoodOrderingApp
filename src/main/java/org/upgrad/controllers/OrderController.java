@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.upgrad.models.*;
+import org.upgrad.repositories.OrderItemRepository;
 import org.upgrad.repositories.StateRepository;
 import org.upgrad.requestResponseEntity.ItemQuantity;
 import org.upgrad.services.*;
@@ -34,6 +35,9 @@ public class OrderController {
 
     @Autowired
     private ItemService itemService;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @Autowired
     private UserAuthTokenService userAuthTokenService;
@@ -79,7 +83,7 @@ public class OrderController {
                                       @RequestParam(required = false) Integer stateId,
                                       @RequestParam(required = false) String type,
                                       @RequestParam Integer paymentId,
-                                      @RequestParam List<ItemQuantity> itemQuantities,
+                                      @RequestBody List<ItemQuantity> itemQuantities,
                                       @RequestParam Double bill,
                                       @RequestParam(required = false) Integer couponId,
                                       @RequestParam(required = false) Double discount,
@@ -93,7 +97,7 @@ public class OrderController {
 
             User user = userAuthToken.getUser();
 
-            if (zipcode.length() != 6) {
+            if (zipcode != null && zipcode.length() != 6) {
                 return new ResponseEntity<>("Invalid zip code!", HttpStatus.BAD_REQUEST);
             }
 
@@ -124,10 +128,10 @@ public class OrderController {
             List<OrderItem> orderItems = new ArrayList<>();
             for (ItemQuantity itemQuantity: itemQuantities) {
                 Item item = itemService.getById(itemQuantity.getItemId());
-                OrderItem orderItem = new OrderItem(itemQuantity.getQuantity(), item.getPrice());
-                orderItems.add(orderItem);
+                OrderItem orderItem = new OrderItem(itemQuantity.getQuantity(), item.getPrice(), order, item);
+                System.out.println(orderItem.getId());
+                orderItemRepository.addOrderItem((int) orderItem.getId(), order.getId(), item.getId(), itemQuantity.getQuantity(), item.getPrice());
             }
-            order.setOrderItems(orderItems);
 
             order.setCoupon(couponService.getById(couponId));
 

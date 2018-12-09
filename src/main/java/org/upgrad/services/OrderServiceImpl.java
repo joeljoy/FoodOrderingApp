@@ -2,6 +2,7 @@ package org.upgrad.services;
 
 import org.springframework.stereotype.Service;
 import org.upgrad.models.Order;
+import org.upgrad.repositories.OrderItemRepository;
 import org.upgrad.repositories.OrderRepository;
 import org.upgrad.requestResponseEntity.OrderResponse;
 
@@ -15,9 +16,11 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private OrderRepository orderRepository;
+    private OrderItemRepository orderItemRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderItemRepository orderItemRepository) {
         this.orderRepository = orderRepository;
+        this.orderItemRepository = orderItemRepository;
     }
 
     @Override
@@ -51,7 +54,7 @@ public class OrderServiceImpl implements OrderService {
                     order.getPayment(),
                     order.getUser(),
                     order.getAddress(),
-                    order.getOrderItems()
+                    orderItemRepository.getByOrderId(order.getId())
             );
             orderResponseList.add(orderResponse);
         }
