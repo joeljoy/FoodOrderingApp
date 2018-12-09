@@ -3,6 +3,7 @@ package org.upgrad.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.security.DigestOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,13 +16,13 @@ public class Order {
     private Integer id;
 
     @Column(name = "bill")
-    private Integer bill;
+    private Double bill;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Coupon coupon;
 
     @Column(name = "discount")
-    private Integer discount;
+    private Double discount;
 
     @Column(name = "date")
     private Date date;
@@ -29,7 +30,6 @@ public class Order {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Payment payment;
 
-    // TODO: Check this!
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User user;
 
@@ -42,8 +42,7 @@ public class Order {
     public Order() {
     }
 
-    // TODO: Check this!
-    public Order(Integer bill, Coupon coupon, Integer discount, Date date, Payment payment, User user, Address address, List<OrderItem> orderItems) {
+    public Order(Double bill, Coupon coupon, Double discount, Date date, Payment payment, User user, Address address, List<OrderItem> orderItems) {
         this.bill = bill;
         this.coupon = coupon;
         this.discount = discount;
@@ -70,11 +69,11 @@ public class Order {
         this.id = id;
     }
 
-    public Integer getBill() {
+    public Double getBill() {
         return bill;
     }
 
-    public void setBill(Integer bill) {
+    public void setBill(Double bill) {
         this.bill = bill;
     }
 
@@ -86,11 +85,11 @@ public class Order {
         this.coupon = coupon;
     }
 
-    public Integer getDiscount() {
+    public Double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Integer discount) {
+    public void setDiscount(Double discount) {
         this.discount = discount;
     }
 

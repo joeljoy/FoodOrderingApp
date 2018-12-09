@@ -1,6 +1,7 @@
 package org.upgrad.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "address")
@@ -24,6 +25,9 @@ public class Address {
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private States state;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<UserAddress> userAddressList;
+
     public Address() {
     }
 
@@ -33,6 +37,22 @@ public class Address {
         this.city = city;
         this.zipcode = zipcode;
         this.state = states;
+    }
+
+    public States getState() {
+        return state;
+    }
+
+    public void setState(States state) {
+        this.state = state;
+    }
+
+    public List<UserAddress> getUserAddressList() {
+        return userAddressList;
+    }
+
+    public void setUserAddressList(List<UserAddress> userAddressList) {
+        this.userAddressList = userAddressList;
     }
 
     public Integer getId() {

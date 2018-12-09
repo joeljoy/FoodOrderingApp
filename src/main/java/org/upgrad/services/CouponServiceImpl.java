@@ -24,6 +24,11 @@ public class CouponServiceImpl implements CouponService {
         return getCouponResponse(couponRepository.findByName(couponName));
     }
 
+    @Override
+    public Coupon getById(Integer couponId) {
+        return couponRepository.getById(couponId);
+    }
+
     private List<CouponResponse> getCouponResponse(List<Coupon> coupons) {
         List<CouponResponse> couponResponseList = new ArrayList<>();
         for (Coupon coupon : coupons) {

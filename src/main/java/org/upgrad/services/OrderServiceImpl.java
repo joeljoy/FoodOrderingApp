@@ -7,6 +7,7 @@ import org.upgrad.requestResponseEntity.OrderResponse;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,8 +21,22 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderResponse> getPastOrders(Integer user_id) {
-        return getOrderResponse(orderRepository.getPastOrders(user_id));
+    public List<OrderResponse> getPastOrders(Integer userId) {
+        return getOrderResponse(orderRepository.getPastOrders(userId));
+    }
+
+    @Override
+    public Integer setOrder(Order order) {
+        Integer id = order.getId();
+        Double bill = order.getBill();
+        Integer couponId = order.getCoupon().getId();
+        Double discount = order.getDiscount();
+        Date date = order.getDate();
+        Integer paymentId = order.getPayment().getId();
+        Integer userId = order.getUser().getId();
+        Integer addressId = order.getAddress().getId();
+        orderRepository.setOrder(id, bill, couponId, discount, date, paymentId, userId, addressId);
+        return id;
     }
 
     private List<OrderResponse> getOrderResponse(List<Order> orders) {

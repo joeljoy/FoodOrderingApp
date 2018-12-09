@@ -4,12 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.upgrad.models.User;
-import org.upgrad.models.UserAuthToken;
-import org.upgrad.services.CouponService;
-import org.upgrad.services.OrderService;
-import org.upgrad.services.UserAuthTokenService;
+import org.upgrad.models.*;
+import org.upgrad.repositories.StateRepository;
+import org.upgrad.requestResponseEntity.ItemQuantity;
+import org.upgrad.services.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -21,6 +22,18 @@ public class OrderController {
 
     @Autowired
     private CouponService couponService;
+
+    @Autowired
+    private AddressService addressService;
+
+    @Autowired
+    private StateRepository stateRepository;
+
+    @Autowired
+    private PaymentService paymentService;
+
+    @Autowired
+    private ItemService itemService;
 
     @Autowired
     private UserAuthTokenService userAuthTokenService;
@@ -54,6 +67,76 @@ public class OrderController {
                 return new ResponseEntity<>("No orders have been made yet!", HttpStatus.NOT_FOUND);
             }
             return ResponseEntity.ok(orderList);
+        }
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<?> addOrder(@RequestParam Integer addressId,
+                                      @RequestParam(required = false) String flatBuildNumber,
+                                      @RequestParam(required = false) String locality,
+                                      @RequestParam(required = false) String city,
+                                      @RequestParam(required = false) String zipcode,
+                                      @RequestParam(required = false) Integer stateId,
+                                      @RequestParam(required = false) String type,
+                                      @RequestParam Integer paymentId,
+                                      @RequestParam List<ItemQuantity> itemQuantities,
+                                      @RequestParam Double bill,
+                                      @RequestParam(required = false) Integer couponId,
+                                      @RequestParam Double discount,
+                                      @RequestHeader String accessToken) {
+        UserAuthToken userAuthToken = userAuthTokenService.isUserLoggedIn(accessToken);
+        if (userAuthToken == null) {
+            return new ResponseEntity<>("Please Login first to access this endpoint!", HttpStatus.UNAUTHORIZED);
+        } else if (userAuthToken.getLogoutAt() != null) {
+            return new ResponseEntity<>("You have already logged out. Please Login first to access this endpoint!", HttpStatus.UNAUTHORIZED);
+        } else {
+
+            User user = userAuthToken.getUser();
+
+            if (zipcode.length() != 6) {
+                return new ResponseEntity<>("Invalid zip code!", HttpStatus.BAD_REQUEST);
+            }
+
+            Order order = new Order();
+            Address address = addressService.getAddressById(addressId);
+
+            if (address == null) {
+                address.setId(addressId);
+                address.setFlatbuildNumber(flatBuildNumber);
+                address.setLocality(locality);
+                address.setCity(city);
+                address.setZipcode(zipcode);
+
+                States state = stateRepository.getById(stateId);
+                address.setStates(state);
+            }
+
+            UserAddress userAddress = new UserAddress(type);
+            List<UserAddress> userAddressList = new ArrayList<>(Arrays.asList(userAddress));
+            user.setUserAddressList(userAddressList);
+            address.setUserAddressList(userAddressList);
+            order.setAddress(address);
+
+            Payment payment = paymentService.getById(paymentId);
+            order.setPayment(payment);
+            order.setBill(bill);
+
+            List<OrderItem> orderItems = new ArrayList<>();
+            for (ItemQuantity itemQuantity: itemQuantities) {
+                Item item = itemService.getById(itemQuantity.getItemId());
+                OrderItem orderItem = new OrderItem(itemQuantity.getQuantity(), item.getPrice());
+                orderItems.add(orderItem);
+            }
+            order.setOrderItems(orderItems);
+
+            order.setCoupon(couponService.getById(couponId));
+
+            if (discount == null) {
+                discount = 0.0;
+            }
+            order.setDiscount(discount);
+
+            return new ResponseEntity<>(orderService.setOrder(order), HttpStatus.CREATED);
         }
     }
 }

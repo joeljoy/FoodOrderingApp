@@ -3,6 +3,7 @@ package org.upgrad.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 /*
  * User model class contain all the attributes to be mapped to all the fields in the users table in the database.
@@ -29,6 +30,9 @@ public class User {
     @Column(name = "contact_number",nullable = false, unique = true)
     private String contactNumber;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<UserAddress> userAddressList;
+
     @Column(nullable = false)
     @JsonIgnore
     private String password;
@@ -42,6 +46,14 @@ public class User {
         this.email = email;
         this.contactNumber = contactNumber;
         this.password = password;
+    }
+
+    public List<UserAddress> getUserAddressList() {
+        return userAddressList;
+    }
+
+    public void setUserAddressList(List<UserAddress> userAddressList) {
+        this.userAddressList = userAddressList;
     }
 
     public Integer getId() {

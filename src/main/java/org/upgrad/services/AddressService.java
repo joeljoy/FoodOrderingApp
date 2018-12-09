@@ -1,5 +1,7 @@
 package org.upgrad.services;
 
-public interface AddressService {
+import org.upgrad.models.Address;
 
+public interface AddressService {
+    Address getAddressById(Integer addressId);
 }

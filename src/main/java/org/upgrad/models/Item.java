@@ -20,7 +20,7 @@ public class Item {
     private String itemName;
 
     @Column(name = "price")
-    private String price;
+    private Integer price;
 
     @Column(name = "type")
     private String type;
@@ -50,7 +50,7 @@ public class Item {
     public Item() {
     }
 
-    public Item(String itemName, String price, String type) {
+    public Item(String itemName, Integer price, String type) {
         this.itemName = itemName;
         this.price = price;
         this.type = type;
@@ -68,11 +68,11 @@ public class Item {
         this.itemName = itemName;
     }
 
-    public String getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

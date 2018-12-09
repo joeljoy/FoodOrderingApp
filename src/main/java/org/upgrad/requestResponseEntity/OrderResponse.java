@@ -8,9 +8,9 @@ import java.util.List;
 public class OrderResponse {
 
     private Integer id;
-    private Integer bill;
+    private Double bill;
     private Coupon coupon;
-    private Integer discount;
+    private Double discount;
     private Date date;
     private Payment payment;
     private User user;
@@ -20,7 +20,7 @@ public class OrderResponse {
     public OrderResponse() {
     }
 
-    public OrderResponse(Integer id, Integer bill, Coupon coupon, Integer discount, Date date, Payment payment, User user, Address address, List<OrderItem> orderItems) {
+    public OrderResponse(Integer id, Double bill, Coupon coupon, Double discount, Date date, Payment payment, User user, Address address, List<OrderItem> orderItems) {
         this.id = id;
         this.bill = bill;
         this.coupon = coupon;
@@ -40,11 +40,11 @@ public class OrderResponse {
         this.id = id;
     }
 
-    public Integer getBill() {
+    public Double getBill() {
         return bill;
     }
 
-    public void setBill(Integer bill) {
+    public void setBill(Double bill) {
         this.bill = bill;
     }
 
@@ -56,11 +56,11 @@ public class OrderResponse {
         this.coupon = coupon;
     }
 
-    public Integer getDiscount() {
+    public Double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Integer discount) {
+    public void setDiscount(Double discount) {
         this.discount = discount;
     }
 
