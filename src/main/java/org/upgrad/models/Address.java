@@ -35,7 +35,7 @@ public class Address {
 //        this.state = states;
 //    }
 
-    public Address(Integer id ,String flat_build_number, String locality, String city, String zipcode, States state) {
+    public Address(Integer id, String flat_build_number, String locality, String city, String zipcode, States state) {
         this.id = id ;
         this.flatbuildNumber = flat_build_number ;
         this.city = city ;
