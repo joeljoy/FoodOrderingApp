@@ -25,9 +25,6 @@ public class Address {
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private States state;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<UserAddress> userAddressList;
-
     public Address() {
     }
 
@@ -45,14 +42,6 @@ public class Address {
 
     public void setState(States state) {
         this.state = state;
-    }
-
-    public List<UserAddress> getUserAddressList() {
-        return userAddressList;
-    }
-
-    public void setUserAddressList(List<UserAddress> userAddressList) {
-        this.userAddressList = userAddressList;
     }
 
     public Integer getId() {

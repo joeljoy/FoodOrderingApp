@@ -72,7 +72,7 @@ public class OrderController {
 
     @PostMapping("/")
     public ResponseEntity<?> addOrder(@RequestParam Integer addressId,
-                                      @RequestParam(required = false) String flatBuildNumber,
+                                      @RequestParam(required = false) String flatBuildNo,
                                       @RequestParam(required = false) String locality,
                                       @RequestParam(required = false) String city,
                                       @RequestParam(required = false) String zipcode,
@@ -82,7 +82,7 @@ public class OrderController {
                                       @RequestParam List<ItemQuantity> itemQuantities,
                                       @RequestParam Double bill,
                                       @RequestParam(required = false) Integer couponId,
-                                      @RequestParam Double discount,
+                                      @RequestParam(required = false) Double discount,
                                       @RequestHeader String accessToken) {
         UserAuthToken userAuthToken = userAuthTokenService.isUserLoggedIn(accessToken);
         if (userAuthToken == null) {
@@ -102,7 +102,7 @@ public class OrderController {
 
             if (address == null) {
                 address.setId(addressId);
-                address.setFlatbuildNumber(flatBuildNumber);
+                address.setFlatbuildNumber(flatBuildNo);
                 address.setLocality(locality);
                 address.setCity(city);
                 address.setZipcode(zipcode);
@@ -111,10 +111,10 @@ public class OrderController {
                 address.setStates(state);
             }
 
-            UserAddress userAddress = new UserAddress(type);
-            List<UserAddress> userAddressList = new ArrayList<>(Arrays.asList(userAddress));
-            user.setUserAddressList(userAddressList);
-            address.setUserAddressList(userAddressList);
+            List<User> userList = new ArrayList<>(Arrays.asList(user));
+            List<Address> addressList = new ArrayList<>(Arrays.asList(address));
+            UserAddress userAddress = new UserAddress(type, userList, addressList);
+
             order.setAddress(address);
 
             Payment payment = paymentService.getById(paymentId);

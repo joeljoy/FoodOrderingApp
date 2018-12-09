@@ -30,9 +30,6 @@ public class User {
     @Column(name = "contact_number",nullable = false, unique = true)
     private String contactNumber;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<UserAddress> userAddressList;
-
     @Column(nullable = false)
     @JsonIgnore
     private String password;
@@ -46,14 +43,6 @@ public class User {
         this.email = email;
         this.contactNumber = contactNumber;
         this.password = password;
-    }
-
-    public List<UserAddress> getUserAddressList() {
-        return userAddressList;
-    }
-
-    public void setUserAddressList(List<UserAddress> userAddressList) {
-        this.userAddressList = userAddressList;
     }
 
     public Integer getId() {
