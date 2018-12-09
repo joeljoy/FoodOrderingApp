@@ -25,7 +25,7 @@ public class Address {
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private States state;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UserAddress> userAddressList;
 
     public Address() {

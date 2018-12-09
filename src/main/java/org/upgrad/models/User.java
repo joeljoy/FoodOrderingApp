@@ -30,7 +30,7 @@ public class User {
     @Column(name = "contact_number",nullable = false, unique = true)
     private String contactNumber;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UserAddress> userAddressList;
 
     @Column(nullable = false)
