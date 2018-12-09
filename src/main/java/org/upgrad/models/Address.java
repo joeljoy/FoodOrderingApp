@@ -43,6 +43,26 @@ public class Address {
         this.state = state;
     }
 
+    public Address(Integer id, String flat_build_number, String locality, String city, String zipcode, States state) {
+        this.id = id ;
+        this.flatbuildNumber = flat_build_number ;
+        this.city = city ;
+        this.locality = locality ;
+        this.zipcode = zipcode ;
+        this.state = state ;
+    }
+
+
+
+    public States getState() {
+        return state;
+    }
+
+    public void setState(States state) {
+        this.state = state;
+    }
+
+
     public Integer getId() {
         return id;
     }
