@@ -26,6 +26,7 @@ public class CouponServiceImpl implements CouponService {
 
     @Override
     public Coupon getById(Integer couponId) {
+        if (couponId == null) return null;
         return couponRepository.getById(couponId);
     }
 

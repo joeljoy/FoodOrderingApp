@@ -12,6 +12,7 @@ import org.upgrad.services.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -101,7 +102,6 @@ public class OrderController {
                 return new ResponseEntity<>("Invalid zip code!", HttpStatus.BAD_REQUEST);
             }
 
-            Order order = new Order();
             Address address = addressService.getAddressById(addressId);
 
             if (address == null) {
@@ -119,25 +119,22 @@ public class OrderController {
             List<Address> addressList = new ArrayList<>(Arrays.asList(address));
             UserAddress userAddress = new UserAddress(type, userList, addressList);
 
-            order.setAddress(address);
-
             Payment payment = paymentService.getById(paymentId);
-            order.setPayment(payment);
-            order.setBill(bill);
+
+            if (discount == null) {
+                discount = 0.0;
+            }
+
+            Coupon coupon = couponService.getById(couponId);
+            Date date = new Date();
+            Order order = new Order(bill, coupon, discount, date, payment, user, address);
 
             List<OrderItem> orderItems = new ArrayList<>();
             for (ItemQuantity itemQuantity: itemQuantities) {
                 Item item = itemService.getById(itemQuantity.getItemId());
                 OrderItem orderItem = new OrderItem(itemQuantity.getQuantity(), item.getPrice(), order, item);
-                orderItemRepository.addOrderItem((int) orderItem.getId(), order.getId(), item.getId(), itemQuantity.getQuantity(), item.getPrice());
+                orderItemRepository.save(orderItem);
             }
-
-            order.setCoupon(couponService.getById(couponId));
-
-            if (discount == null) {
-                discount = 0.0;
-            }
-            order.setDiscount(discount);
 
             return new ResponseEntity<>(orderService.setOrder(order), HttpStatus.CREATED);
         }

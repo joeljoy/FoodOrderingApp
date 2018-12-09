@@ -30,16 +30,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Integer setOrder(Order order) {
-        Integer id = order.getId();
-        Double bill = order.getBill();
-        Integer couponId = order.getCoupon().getId();
-        Double discount = order.getDiscount();
-        Date date = order.getDate();
-        Integer paymentId = order.getPayment().getId();
-        Integer userId = order.getUser().getId();
-        Integer addressId = order.getAddress().getId();
-        orderRepository.setOrder(id, bill, couponId, discount, date, paymentId, userId, addressId);
-        return id;
+        orderRepository.save(order);
+        return order.getId();
     }
 
     private List<OrderResponse> getOrderResponse(List<Order> orders) {

@@ -17,6 +17,6 @@ public interface OrderItemRepository extends CrudRepository<OrderItem, Integer> 
 
     @Transactional
     @Modifying
-    @Query(nativeQuery = true, value = "INSERT INTO order_item(id, order_id, item_id, quantity, price) VALUES (?1, ?2, ?3, ?4, ?5)")
-    void addOrderItem(Integer id, Integer orderId, Integer itemId, Integer quantity, Integer price);
+    @Query(nativeQuery = true, value = "INSERT INTO order_item(order_id, item_id, quantity, price) VALUES (?2, ?3, ?4, ?5)")
+    void addOrderItem(Integer orderId, Integer itemId, Integer quantity, Integer price);
 }
