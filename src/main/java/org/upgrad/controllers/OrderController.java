@@ -129,7 +129,6 @@ public class OrderController {
             for (ItemQuantity itemQuantity: itemQuantities) {
                 Item item = itemService.getById(itemQuantity.getItemId());
                 OrderItem orderItem = new OrderItem(itemQuantity.getQuantity(), item.getPrice(), order, item);
-                System.out.println(orderItem.getId());
                 orderItemRepository.addOrderItem((int) orderItem.getId(), order.getId(), item.getId(), itemQuantity.getQuantity(), item.getPrice());
             }
 
