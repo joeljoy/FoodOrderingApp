@@ -14,9 +14,4 @@ public interface OrderItemRepository extends CrudRepository<OrderItem, Integer> 
 
     @Query(nativeQuery = true, value = "SELECT * FROM order_item WHERE order_id = ?1")
     List<OrderItem> getByOrderId(Integer orderId);
-
-    @Transactional
-    @Modifying
-    @Query(nativeQuery = true, value = "INSERT INTO order_item(order_id, item_id, quantity, price) VALUES (?2, ?3, ?4, ?5)")
-    void addOrderItem(Integer orderId, Integer itemId, Integer quantity, Integer price);
 }

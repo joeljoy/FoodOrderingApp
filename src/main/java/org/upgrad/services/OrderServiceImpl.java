@@ -45,8 +45,8 @@ public class OrderServiceImpl implements OrderService {
                     order.getDate(),
                     order.getPayment(),
                     order.getUser(),
-                    order.getAddress(),
-                    orderItemRepository.getByOrderId(order.getId())
+                    order.getAddress()
+                    //orderItemRepository.getByOrderId(order.getId())
             );
             orderResponseList.add(orderResponse);
         }

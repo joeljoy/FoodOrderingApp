@@ -111,8 +111,8 @@ public class OrderController {
                 address.setCity(city);
                 address.setZipcode(zipcode);
 
-                States state = stateRepository.getById(stateId);
-                address.setStates(state);
+                State state = stateRepository.getById(stateId);
+                address.setState(state);
             }
 
             List<User> userList = new ArrayList<>(Arrays.asList(user));

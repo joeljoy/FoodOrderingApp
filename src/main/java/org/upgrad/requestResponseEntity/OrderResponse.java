@@ -15,12 +15,12 @@ public class OrderResponse {
     private Payment payment;
     private User user;
     private Address address;
-    private List<OrderItem> orderItems;
+//    private List<OrderItem> orderItems;
 
     public OrderResponse() {
     }
 
-    public OrderResponse(Integer id, Double bill, Coupon coupon, Double discount, Date date, Payment payment, User user, Address address, List<OrderItem> orderItems) {
+    public OrderResponse(Integer id, Double bill, Coupon coupon, Double discount, Date date, Payment payment, User user, Address address){//, List<OrderItem> orderItems) {
         this.id = id;
         this.bill = bill;
         this.coupon = coupon;
@@ -29,7 +29,7 @@ public class OrderResponse {
         this.payment = payment;
         this.user = user;
         this.address = address;
-        this.orderItems = orderItems;
+//        this.orderItems = orderItems;
     }
 
     public Integer getId() {
@@ -96,11 +96,11 @@ public class OrderResponse {
         this.address = address;
     }
 
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
-    }
-
-    public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
-    }
+//    public List<OrderItem> getOrderItems() {
+//        return orderItems;
+//    }
+//
+//    public void setOrderItems(List<OrderItem> orderItems) {
+//        this.orderItems = orderItems;
+//    }
 }

@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "states")
-public class States {
+public class State {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -12,10 +12,10 @@ public class States {
     @Column(name = "state_name")
     private String stateName;
 
-    public States() {
+    public State() {
     }
 
-    public States(String stateName) {
+    public State(String stateName) {
         this.stateName = stateName;
     }
 
