@@ -1,7 +1,7 @@
 package org.upgrad.repositories;
 
 import org.upgrad.models.Address;
-import org.upgrad.models.States;
+import org.upgrad.models.State;
 import org.upgrad.models.UserAddress;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -30,6 +30,8 @@ public interface AddressRepository extends CrudRepository<Address, Integer> {
     @Query(nativeQuery = true,value = "SELECT max(id) FROM ADDRESS ")
     Integer countAddress();
 
+    @Query(nativeQuery = true, value = "SELECT * FROM address WHERE (id) = (?1)")
+    Address getAddressById(Integer addressId);
 
     @Query(nativeQuery = true,value = "SELECT *  FROM ADDRESS where id = ?1 ")
     Address findAddressById(Integer id);

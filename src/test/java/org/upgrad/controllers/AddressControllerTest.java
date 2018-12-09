@@ -13,7 +13,7 @@
 //import org.springframework.test.context.junit4.SpringRunner;
 //import org.springframework.test.web.servlet.MockMvc;
 //import org.upgrad.models.Address;
-//import org.upgrad.models.States;
+//import org.upgrad.models.State;
 //import org.upgrad.models.UserAuthToken;
 //import org.upgrad.services.AddressService;
 //import org.upgrad.services.UserAuthTokenService;
@@ -376,10 +376,10 @@
 //
 //    @Test
 //    public void getAllStates() throws Exception{
-//        States states = new States();
+//        State states = new State();
 //        states.setId(1);
 //        states.setStateName("Maharashtra");
-//        List<States> statesList = singletonList(states);
+//        List<State> statesList = singletonList(states);
 //        Mockito.when(addressService.getAllStates()).thenReturn(statesList);
 //        String url = "/states";
 //        mvc.perform(get(url)

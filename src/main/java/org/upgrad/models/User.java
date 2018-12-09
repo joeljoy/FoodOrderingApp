@@ -3,6 +3,7 @@ package org.upgrad.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 /*
  * User model class contain all the attributes to be mapped to all the fields in the users table in the database.

@@ -1,17 +1,17 @@
 package org.upgrad.requestResponseEntity;
 
-import org.upgrad.models.States;
+import org.upgrad.models.State;
 
 public class AddressResponse {
     private  String flat_build_number;
     private Integer id;
-    private States state;
+    private State state;
     private String city;
     private String locality;
     private String zipcode;
 
 
-    public AddressResponse(Integer id, String flatbuildNumber, String locality, String city, String zipcode, States state) {
+    public AddressResponse(Integer id, String flatbuildNumber, String locality, String city, String zipcode, State state) {
         System.out.println(flatbuildNumber+" "+locality+" "+city+" "+zipcode);
         this.flat_build_number = flat_build_number ;
         this.city = city ;
@@ -41,11 +41,11 @@ public class AddressResponse {
         this.id = id;
     }
 
-    public States getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(States state) {
+    public void setState(State state) {
         this.state = state;
     }
 

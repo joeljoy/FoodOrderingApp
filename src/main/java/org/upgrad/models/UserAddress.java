@@ -1,52 +1,54 @@
 package org.upgrad.models;
 
-import org.springframework.boot.autoconfigure.web.ResourceProperties;
-import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import java.util.List;
 
 @Entity
-@Table(name="user_address")
+@Table(name = "user_address")
 public class UserAddress {
-
-
-
-    public  UserAddress(){
-
-    }
-
-    public UserAddress(User user,Address address,String type){
-        this.user = user;
-        this.address = address;
-        this.type = type;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
 
     @Column(name = "type")
     private String type;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<User> users;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Address> addresses;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "address_id")
-    private Address address;
+    public UserAddress() {
+    }
 
+    public UserAddress(String type, List<User> users, List<Address> addresses) {
+        this.type = type;
+        this.users = users;
+        this.addresses = addresses;
+    }
 
-    public long getId() {
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -57,42 +59,4 @@ public class UserAddress {
     public void setType(String type) {
         this.type = type;
     }
-
-//    public Integer getUser_id() {
-//        return user_id;
-//    }
-//
-//    public void setUser_id(Integer user_id) {
-//        this.user_id = user_id;
-//    }
-
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Address getAddress_id() {
-        return address;
-    }
-
-    public void setAddress_id(Address address_id) {
-        this.address = address_id;
-    }
-
-//    public Integer getAddress_id() {
-//        return address_id;
-//    }
-//
-//    public void setAddress_id(Integer address_id) {
-//        this.address_id = address_id;
-//    }
-
-
-
-
-
 }

@@ -1,45 +1,27 @@
-package org.upgrad.models;
+package org.upgrad.requestResponseEntity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.upgrad.models.*;
 
-import javax.persistence.*;
-import java.security.DigestOutputStream;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "orders")
-public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class OrderResponse {
+
     private Integer id;
-
-    @Column(name = "bill")
     private Double bill;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Coupon coupon;
-
-    @Column(name = "discount")
     private Double discount;
-
-    @Column(name = "date")
     private Date date;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Payment payment;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User user;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Address address;
+    private List<OrderItemResponse> orderItems;
 
-    public Order() {
+    public OrderResponse() {
     }
 
-    public Order(Double bill, Coupon coupon, Double discount, Date date, Payment payment, User user, Address address) {
+    public OrderResponse(Integer id, Double bill, Coupon coupon, Double discount, Date date, Payment payment, User user, Address address, List<OrderItemResponse> orderItems) {
+        this.id = id;
         this.bill = bill;
         this.coupon = coupon;
         this.discount = discount;
@@ -47,6 +29,7 @@ public class Order {
         this.payment = payment;
         this.user = user;
         this.address = address;
+        this.orderItems = orderItems;
     }
 
     public Integer getId() {
@@ -111,5 +94,13 @@ public class Order {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public List<OrderItemResponse> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItemResponse> orderItems) {
+        this.orderItems = orderItems;
     }
 }

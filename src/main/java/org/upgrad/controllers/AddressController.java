@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.upgrad.models.Address;
-import org.upgrad.models.States;
+import org.upgrad.models.State;
 import org.upgrad.models.UserAuthToken;
 import org.upgrad.services.AddressService;
 import org.upgrad.services.UserAuthTokenService;
@@ -39,7 +39,7 @@ public class AddressController {
             if(zipcode.length() == 6 && zipcode.matches("[0-9]+"))
             {
                 String addrtype="temp";
-                States state = addressService.checkValidState(stateid);
+                State state = addressService.checkValidState(stateid);
 
                 int addressid = addressService.countAddress()+1;
 

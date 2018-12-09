@@ -1,15 +1,15 @@
 package org.upgrad.services;
 
 import org.upgrad.models.Address;
-import org.upgrad.models.States;
+import org.upgrad.models.State;
 
 public interface AddressService {
 
-    Iterable<States> getAllStates() ;
+    Iterable<State> getAllState() ;
 
 
 
-    States checkValidState(Integer id);
+    State checkValidState(Integer id);
 
 
     Integer addAddress(Address address);
@@ -21,6 +21,8 @@ public interface AddressService {
     Integer addUserAddress(String temp, Integer user_id, Integer address_id) ;
 
     Address getaddressById( Integer addressId);
+
+    Address getAddressById(Integer addressId);
 
 
     Boolean getAddress( Integer addressId);

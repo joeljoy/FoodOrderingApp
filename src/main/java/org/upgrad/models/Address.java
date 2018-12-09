@@ -21,21 +21,29 @@ public class Address {
     @Column(name = "zipcode")
     private String zipcode;
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private States state;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private State state;
 
     public Address() {
     }
 
-    public Address(String flatbuildNumber, String locality, String city, String zipcode, States states) {
+    public Address(String flatbuildNumber, String locality, String city, String zipcode, State state) {
         this.flatbuildNumber = flatbuildNumber;
         this.locality = locality;
         this.city = city;
         this.zipcode = zipcode;
-        this.state = states;
+        this.state = state;
     }
 
-    public Address(Integer id, String flat_build_number, String locality, String city, String zipcode, States state) {
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public Address(Integer id, String flat_build_number, String locality, String city, String zipcode, State state) {
         this.id = id ;
         this.flatbuildNumber = flat_build_number ;
         this.city = city ;
@@ -46,11 +54,11 @@ public class Address {
 
 
 
-    public States getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(States state) {
+    public void setState(State state) {
         this.state = state;
     }
 
@@ -93,13 +101,5 @@ public class Address {
 
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
-    }
-
-    public States getStates() {
-        return state;
-    }
-
-    public void setStates(States states) {
-        this.state = states;
     }
 }

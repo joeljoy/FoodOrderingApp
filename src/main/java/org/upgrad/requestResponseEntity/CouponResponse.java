@@ -1,24 +1,18 @@
-package org.upgrad.models;
+package org.upgrad.requestResponseEntity;
 
-import javax.persistence.*;
+public class CouponResponse {
 
-@Entity
-@Table(name = "coupon")
-public class Coupon {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "coupon_name", nullable = false)
     private String couponName;
 
-    @Column(name = "percent")
     private Integer percent;
 
-    public Coupon() {}
+    public CouponResponse() {
+    }
 
-    public Coupon(String couponName, Integer percent) {
+    public CouponResponse(Integer id, String couponName, Integer percent) {
+        this.id = id;
         this.couponName = couponName;
         this.percent = percent;
     }

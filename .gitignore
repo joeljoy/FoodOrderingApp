@@ -1,0 +1,4 @@
+src/main/resources/application.properties
+src/main/resources/localhost.properties
+.idea/*
+target/*
