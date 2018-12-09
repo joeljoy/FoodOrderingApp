@@ -14,9 +14,11 @@ public interface UserService {
 
     void addUser(User newuser);
 
-    User updateUserDetails(String firstname, String lastname, long userid);
+    void updateUserDetails(String firstname, String lastname, User user);
 
     User getUserById(Integer id);
+
+    User findUserById(long id);
 
     Integer updateUserPassword(String password, Integer id);
 }

@@ -30,15 +30,23 @@ public class UserServiceImpl implements UserService{
     public void addUser(User newuser) {
 
         userRepository.save(newuser);
+
     }
 
     @Override
-    public User updateUserDetails(String firstname, String lastname, long userid) {
+    public void updateUserDetails(String firstname, String lastname, User user) {
+        Integer userid = user.getId();
+        if(lastname == null){
+            lastname = user.getLastName();
+        }
         System.out.println("name: "+firstname+" "+lastname+" "+userid);
 
         userRepository.updateddetails(firstname,lastname,userid);
-        return userRepository.findUserbyID(userid);
+
+//        userRepository.save()
+//        return userRepository.findUserbyID(userid);
     }
+
 
     @Override
     public Integer updateUserPassword(String password, Integer id) {
@@ -48,6 +56,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getUserById(Integer id) {
         return userRepository.findPasswordById(id);
+    }
+
+    @Override
+    public User findUserById(long id) {
+        return userRepository.findUserbyID(id);
     }
 
 

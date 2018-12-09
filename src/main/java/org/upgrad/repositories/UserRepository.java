@@ -32,11 +32,13 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query(nativeQuery = true,value = "SELECT * FROM USERS WHERE id=?1")
     User findUserbyID(long userid);
 
+    @Transactional
+    @Modifying
     @Query(nativeQuery = true,value="UPDATE USERS SET password =?1  WHERE id=?2")
     Integer updatePassword(String password, Integer id);
 
 
     @Query(nativeQuery = true,value="SELECT * FROM USERS WHERE id=?1")
-    User findPasswordById(Integer id);
+    User findPasswordById(long id);
 }
 
