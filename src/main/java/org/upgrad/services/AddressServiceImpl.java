@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.upgrad.repositories.AddressRepository;
 import org.upgrad.repositories.StateRepository;
 import org.upgrad.models.Address;
-import org.upgrad.models.States;
+import org.upgrad.models.State;
 
 
 import javax.transaction.Transactional;
@@ -29,7 +29,7 @@ public class AddressServiceImpl implements AddressService {
 
 
     @Override
-    public States checkValidState(Integer id) { return stateRepository.isValidState(id); }
+    public State checkValidState(Integer id) { return stateRepository.isValidState(id); }
 
 
     @Override
@@ -43,7 +43,7 @@ public class AddressServiceImpl implements AddressService {
 
 
     @Override
-    public Iterable<States> getAllStates() {
+    public Iterable<State> getAllState() {
         return stateRepository.getAllStates();
     }
 
@@ -98,7 +98,7 @@ public class AddressServiceImpl implements AddressService {
             for (Integer addressId: permAddressIdList ) {
                 System.out.println("Details for Address id "+addressId);
                 Address  add = addressRepository.findAddressById(addressId) ;
-                States state = stateRepository.getStatebyId(add.getState().getId());
+                State state = stateRepository.getStatebyId(add.getState().getId());
 
                 Address resp = new Address(add.getId(),add.getFlatbuildNumber(), add.getLocality(), add.getCity(), add.getZipcode(), state);
                 userList.add(resp);

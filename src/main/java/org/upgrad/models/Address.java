@@ -43,7 +43,7 @@ public class Address {
         this.state = state;
     }
 
-    public Address(Integer id, String flat_build_number, String locality, String city, String zipcode, States state) {
+    public Address(Integer id, String flat_build_number, String locality, String city, String zipcode, State state) {
         this.id = id ;
         this.flatbuildNumber = flat_build_number ;
         this.city = city ;
@@ -54,11 +54,11 @@ public class Address {
 
 
 
-    public States getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(States state) {
+    public void setState(State state) {
         this.state = state;
     }
 

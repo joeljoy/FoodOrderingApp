@@ -1,7 +1,7 @@
 package org.upgrad.repositories;
 
 import org.upgrad.models.Address;
-import org.upgrad.models.States;
+import org.upgrad.models.State;
 import org.upgrad.models.UserAddress;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
