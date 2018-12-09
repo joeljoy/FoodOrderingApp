@@ -1,9 +1,13 @@
 package org.upgrad.services;
 
 import org.springframework.stereotype.Service;
+import org.upgrad.models.Item;
 import org.upgrad.models.Order;
+import org.upgrad.models.OrderItem;
 import org.upgrad.repositories.OrderItemRepository;
 import org.upgrad.repositories.OrderRepository;
+import org.upgrad.requestResponseEntity.ItemResponse;
+import org.upgrad.requestResponseEntity.OrderItemResponse;
 import org.upgrad.requestResponseEntity.OrderResponse;
 
 import javax.transaction.Transactional;
@@ -45,11 +49,35 @@ public class OrderServiceImpl implements OrderService {
                     order.getDate(),
                     order.getPayment(),
                     order.getUser(),
-                    order.getAddress()
-                    //orderItemRepository.getByOrderId(order.getId())
+                    order.getAddress(),
+                    getOrderItemResponse(orderItemRepository.getByOrderId(order.getId()))
             );
             orderResponseList.add(orderResponse);
         }
         return orderResponseList;
+    }
+
+    private List<OrderItemResponse> getOrderItemResponse(List<OrderItem> orderItems) {
+        List<OrderItemResponse> orderItemResponseList = new ArrayList<>();
+        for (OrderItem orderItem: orderItems) {
+            OrderItemResponse orderItemResponse = new OrderItemResponse(
+                    orderItem.getId(),
+                    getItemReponse(orderItem.getItem()),
+                    orderItem.getQuantity(),
+                    orderItem.getPrice()
+            );
+            orderItemResponseList.add(orderItemResponse);
+        }
+        return orderItemResponseList;
+    }
+
+    private ItemResponse getItemReponse(Item item) {
+        ItemResponse itemResponse = new ItemResponse(
+                item.getId(),
+                item.getItemName(),
+                item.getPrice(),
+                item.getType()
+        );
+        return itemResponse;
     }
 }
