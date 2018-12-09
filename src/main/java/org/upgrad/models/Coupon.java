@@ -16,10 +16,6 @@ public class Coupon {
     @Column(name = "percent")
     private Integer percent;
 
-    // TODO: Check this!
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    private Order order;
-
     public Coupon() {}
 
     public Coupon(String couponName, Integer percent) {
@@ -50,12 +46,4 @@ public class Coupon {
     public void setPercent(Integer percent) {
         this.percent = percent;
     }
-
-//    public Order getOrder() {
-//        return order;
-//    }
-
-//    public void setOrder(Order order) {
-//        this.order = order;
-//    }
 }

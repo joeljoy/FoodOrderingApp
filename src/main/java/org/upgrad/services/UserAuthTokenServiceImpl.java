@@ -26,8 +26,8 @@ public class UserAuthTokenServiceImpl implements UserAuthTokenService {
     @Override
     public void addAccessToken(Integer userId, String accessToken) {
         Optional<User> user = userRepository.findById(userId);
-        Date date =new Date();
-        UserAuthToken userAuthToken = new UserAuthToken(user.get(),accessToken,date);
+        Date date = new Date();
+        UserAuthToken userAuthToken = new UserAuthToken(user.get(), accessToken, date);
         userAuthTokenRepository.save(userAuthToken);
     }
 

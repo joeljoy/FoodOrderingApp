@@ -25,6 +25,9 @@ public class Item {
     @Column(name = "type")
     private String type;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<OrderItem> orderItems;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "restaurant_item",

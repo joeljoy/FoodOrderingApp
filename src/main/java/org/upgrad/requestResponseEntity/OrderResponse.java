@@ -1,49 +1,27 @@
-package org.upgrad.models;
+package org.upgrad.requestResponseEntity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.upgrad.models.*;
 
-import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "orders")
-public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class OrderResponse {
+
     private Integer id;
-
-    @Column(name = "bill")
     private Integer bill;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Coupon coupon;
-
-    @Column(name = "discount")
     private Integer discount;
-
-    @Column(name = "date")
     private Date date;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Payment payment;
-
-    // TODO: Check this!
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User user;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Address address;
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OrderItem> orderItems;
 
-    public Order() {
+    public OrderResponse() {
     }
 
-    // TODO: Check this!
-    public Order(Integer bill, Coupon coupon, Integer discount, Date date, Payment payment, User user, Address address, List<OrderItem> orderItems) {
+    public OrderResponse(Integer id, Integer bill, Coupon coupon, Integer discount, Date date, Payment payment, User user, Address address, List<OrderItem> orderItems) {
+        this.id = id;
         this.bill = bill;
         this.coupon = coupon;
         this.discount = discount;
@@ -51,14 +29,6 @@ public class Order {
         this.payment = payment;
         this.user = user;
         this.address = address;
-        this.orderItems = orderItems;
-    }
-
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
-    }
-
-    public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
 
@@ -124,5 +94,13 @@ public class Order {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 }
