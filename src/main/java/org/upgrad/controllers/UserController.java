@@ -144,9 +144,9 @@ public class UserController {
         else if(userAuthTokenService.isUserLoggedIn(accessToken).getLogoutAt()!=null){
             return new ResponseEntity<>("You have already logged out. Please Login first to access this endpoint!", HttpStatus.UNAUTHORIZED);
         }  else{
-           long userid = tokendetails.getUser().getId();
-           userService.updateUserDetails(firstname,lastname,userid);
-           User updated = userService.findUserById(userid);
+           User user = tokendetails.getUser();
+           userService.updateUserDetails(firstname,lastname,user);
+           User updated = userService.findUserById(user.getId());
 //           User user = userService.findUser("9090909");
            return new ResponseEntity(updated, HttpStatus.OK);
         }

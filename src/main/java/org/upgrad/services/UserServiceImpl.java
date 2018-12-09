@@ -34,7 +34,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void updateUserDetails(String firstname, String lastname, long userid) {
+    public void updateUserDetails(String firstname, String lastname, User user) {
+        Integer userid = user.getId();
+        if(lastname == null){
+            lastname = user.getLastName();
+        }
         System.out.println("name: "+firstname+" "+lastname+" "+userid);
 
         userRepository.updateddetails(firstname,lastname,userid);
