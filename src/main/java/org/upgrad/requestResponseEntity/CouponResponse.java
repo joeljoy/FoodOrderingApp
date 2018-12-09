@@ -1,28 +1,18 @@
-package org.upgrad.models;
+package org.upgrad.requestResponseEntity;
 
-import javax.persistence.*;
+public class CouponResponse {
 
-@Entity
-@Table(name = "coupon")
-public class Coupon {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "coupon_name", nullable = false)
     private String couponName;
 
-    @Column(name = "percent")
     private Integer percent;
 
-    // TODO: Check this!
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Order order;
+    public CouponResponse() {
+    }
 
-    public Coupon() {}
-
-    public Coupon(String couponName, Integer percent) {
+    public CouponResponse(Integer id, String couponName, Integer percent) {
+        this.id = id;
         this.couponName = couponName;
         this.percent = percent;
     }
@@ -49,13 +39,5 @@ public class Coupon {
 
     public void setPercent(Integer percent) {
         this.percent = percent;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 }
